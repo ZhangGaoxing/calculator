@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.Views.ColorPage"
+             Title="颜色">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="RGB 转 十六进制" FontSize="20" />
+            
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Label Text="R：" VerticalOptions="Center" />
+                <Entry x:Name="RedVal" HorizontalOptions="FillAndExpand" Placeholder="60" Keyboard="Numeric" />
+                <Label Text="G：" VerticalOptions="Center" />
+                <Entry x:Name="GreenVal" HorizontalOptions="FillAndExpand" Placeholder="179" Keyboard="Numeric" />
+                <Label Text="B：" VerticalOptions="Center" />
+                <Entry x:Name="BlueVal" HorizontalOptions="FillAndExpand" Placeholder="113" Keyboard="Numeric" />
+                <Button x:Name="HexConvert" Text="转换" Clicked="HexConvert_Clicked" />
+            </StackLayout>
+            
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                <Label Text="结果：" VerticalOptions="Center" />
+                <Entry x:Name="HexResult" HorizontalOptions="FillAndExpand" Placeholder="#3CB371" />
+            </StackLayout>
+
+            <BoxView x:Name="ToHexColor" Grid.Row="2" Grid.Column="1" BackgroundColor="#3CB371" />
+        </Grid>
+
+        <Grid Margin="10" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="十六进制 转 RGB" FontSize="20" />
+
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Label Text="Hex：" VerticalOptions="Center" />
+                <Entry x:Name="HexVal" HorizontalOptions="FillAndExpand" Placeholder="#D2691E" />
+                <Button x:Name="RGBConvert" Text="转换" Clicked="RGBConvert_Clicked" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                <Label Text="结果：" VerticalOptions="Center" />
+                <Entry x:Name="RGBResult" HorizontalOptions="FillAndExpand" Placeholder="210,105,30" />
+            </StackLayout>
+
+            <BoxView x:Name="ToRGBColor" Grid.Row="2" Grid.Column="1" BackgroundColor="#D2691E" />
+        </Grid>
+    </Grid>
+    
+</ContentPage>

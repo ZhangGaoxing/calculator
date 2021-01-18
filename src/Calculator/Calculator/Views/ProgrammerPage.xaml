@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.Views.ProgrammerPage"
+             xmlns:local="clr-namespace:Calculator.Views"
+             Title="程序员">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="fontFamily"
+                  x:TypeArguments="x:String"
+                  iOS="Segoe MDL2 Assets"
+                  Android="segmdl2.ttf#Segoe MDL2 Assets" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="#D3D3D3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="8,0,8,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0">
+                <Label x:Name="Tip" HorizontalOptions="End" FontSize="12" TextColor="#808080" Text="" />
+            </ScrollView>
+            <ScrollView Grid.Row="1">
+                <Label x:Name="Result" HorizontalOptions="End" FontSize="32" TextColor="Black" Text="" />
+            </ScrollView>
+        </Grid>
+
+        <StackLayout Grid.Row="1" Margin="8,0,8,0" VerticalOptions="EndAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" HeightRequest="30" Margin="0,0,0,-8">
+                <Button x:Name="Hex" ClassId="Hex" Text="HEX" TextColor="Black" FontSize="8" HeightRequest="25" WidthRequest="50" Clicked="SystemSwitch_Clicked" />
+                <Label x:Name="HexResult" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="12" Text="" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" HeightRequest="30" Margin="0,0,0,-8">
+                <Button x:Name="Dec" ClassId="Dec" Text="DEC" TextColor="#009999" FontSize="8" HeightRequest="25" WidthRequest="50" Clicked="SystemSwitch_Clicked" />
+                <Label x:Name="DecResult" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="12" Text="" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" HeightRequest="30" Margin="0,0,0,-8">
+                <Button x:Name="Otc" ClassId="Otc" Text="OTC" TextColor="Black" FontSize="8" HeightRequest="25" WidthRequest="50" Clicked="SystemSwitch_Clicked" />
+                <Label x:Name="OtcResult" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="12" Text="" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" HeightRequest="30" Margin="0,0,0,-8">
+                <Button x:Name="Bin" ClassId="Bin" Text="BIN" TextColor="Black" FontSize="8" HeightRequest="25" WidthRequest="50" Clicked="SystemSwitch_Clicked" />
+                <Label x:Name="BinResult" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="12" Text="" />
+            </StackLayout>
+        </StackLayout>
+
+        <Grid Grid.Row="2" Margin="8,0,8,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button ClassId="Num" x:Name="NumKeybord" Grid.Column="0" Text="&#xE75F;" FontFamily="{StaticResource fontFamily}" TextColor="#009999" FontSize="12" Clicked="Keybord_Clicked" />
+            <Button ClassId="Byte" x:Name="ByteKeybord" Grid.Column="1" Text="&#xE10C;" FontFamily="{StaticResource fontFamily}" TextColor="Black" FontSize="12" Clicked="Keybord_Clicked" />
+            <Button Grid.Column="2" Grid.ColumnSpan="2" Text="QWORD" TextColor="Black" IsEnabled="True" FontSize="12" Clicked="WordChange_Clicked" />
+            <Button x:Name="MS" ClassId="MS" Grid.Column="4" Text="MS" TextColor="Black" IsEnabled="True" FontSize="12" Clicked="Memory_Clicked" />
+            <Button x:Name="M" ClassId="M" Grid.Column="5" Text="M" TextColor="Black" IsEnabled="False" FontSize="12" Clicked="Memory_Clicked" />
+        </Grid>
+
+        <Grid x:Name="MemoryGrid" Grid.Row="3" Margin="8,0,8,0" IsVisible="False">
+            <ListView x:Name="MemoryHistory" ItemTapped="MemoryHistory_ItemTapped" VerticalOptions="FillAndExpand" RowHeight="45">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="5">
+                                <Label Text="{Binding Memory}" FontSize="18" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid x:Name="ButtonGrid" Grid.Row="3" Margin="8,0,8,8" IsVisible="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button ClassId="Lsh" x:Name="Lsh" Grid.Row="0" Grid.Column="0" Text="Lsh" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button ClassId="RoL" x:Name="RoL" Grid.Row="0" Grid.Column="0" Text="RoL" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" IsVisible="False" />
+            <Button ClassId="Rsh" x:Name="Rsh" Grid.Row="0" Grid.Column="1" Text="Rsh" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button ClassId="RoR" x:Name ="RoR" Grid.Row="0" Grid.Column="1" Text="RoR" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" IsVisible="False" />
+            <Button ClassId="Or" Grid.Row="0" Grid.Column="2" Text="Or" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button ClassId="Xor" Grid.Row="0" Grid.Column="3" Text="Xor" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button ClassId="Not" Grid.Row="0" Grid.Column="4" Text="Not" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+            <Button ClassId="And" Grid.Row="0" Grid.Column="5" Text="And" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+
+            <Button Grid.Row="1" Grid.Column="0" Text="↑" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" FontAttributes="Bold" BackgroundColor="Silver" Clicked="Shift_Clicked" />
+            <Button ClassId="Mod" Grid.Row="1" Grid.Column="1" Text="Mod" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button ClassId="CE" Grid.Row="1" Grid.Column="2" Text="CE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Func_Clicked" />
+            <Button ClassId="C" Grid.Row="1" Grid.Column="3" Text="C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Func_Clicked" />
+            <Button ClassId="Backspace" Grid.Row="1" Grid.Column="4" Text="&#xE94F;" FontFamily="{StaticResource fontFamily}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="12" BackgroundColor="Silver" Clicked="Func_Clicked" />
+            <Button ClassId="Div" Grid.Row="1" Grid.Column="5" Text="÷" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+
+            <Button Grid.Row="2" Grid.Column="0" Text="A" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.hexStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="2" Grid.Column="1" Text="B" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.hexStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="2" Grid.Column="2" Text="7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.otcStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="2" Grid.Column="3" Text="8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.decStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="2" Grid.Column="4" Text="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.decStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button ClassId="Mult" Grid.Row="2" Grid.Column="5" Text="×" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+
+            <Button Grid.Row="3" Grid.Column="0" Text="C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.hexStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="3" Grid.Column="1" Text="D" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.hexStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="3" Grid.Column="2" Text="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.otcStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="3" Grid.Column="3" Text="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.otcStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="3" Grid.Column="4" Text="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.otcStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button ClassId="Minus" Grid.Row="3" Grid.Column="5" Text="-" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+
+            <Button Grid.Row="4" Grid.Column="0" Text="E" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.hexStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="4" Grid.Column="1" Text="F" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.hexStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="4" Grid.Column="2" Text="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="4" Grid.Column="3" Text="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.otcStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button Grid.Row="4" Grid.Column="4" Text="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BindingContext="{x:Static local:ProgrammerPage.otcStyle}" BackgroundColor="{Binding Background}" IsEnabled="{Binding IsEnabled}" Clicked="Number_Clicked" />
+            <Button ClassId="Add" Grid.Row="4" Grid.Column="5" Text="+" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+
+            <Button Grid.Row="5" Grid.Column="0" Text="(" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button Grid.Row="5" Grid.Column="1" Text=")" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+            <Button ClassId="Opposite" Grid.Row="5" Grid.Column="2" Text="±" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+            <Button Grid.Row="5" Grid.Column="3" Text="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="5" Grid.Column="4" Text="." HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="#808080" IsEnabled="False" />
+            <Button ClassId="Equal" Grid.Row="5" Grid.Column="5" Text="=" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="15" BackgroundColor="Silver" Clicked="Operator_Clicked" />
+        </Grid>
+
+        <Grid x:Name="ByteGrid" Grid.Row="3" Margin="8,0,8,8" IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="lll" ClassId="63" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="kkk" ClassId="62" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="jjj" ClassId="61" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="iii" ClassId="60" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="60" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="hhh" ClassId="59" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ggg" ClassId="58" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="fff" ClassId="57" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="eee" ClassId="56" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="56" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="ddd" ClassId="55" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ccc" ClassId="54" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="bbb" ClassId="53" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="aaa" ClassId="52" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="52" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="zz" ClassId="51" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="yy" ClassId="50" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="xx" ClassId="49" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ww" ClassId="48" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="48" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="vv" ClassId="47" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="uu" ClassId="46" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="tt" ClassId="45" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ss" ClassId="44" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="44" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="rr" ClassId="43" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="qq" ClassId="42" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="pp" ClassId="41" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="oo" ClassId="40" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="40" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="nn" ClassId="39" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="mm" ClassId="38" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ll" ClassId="37" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="kk" ClassId="36" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="36" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="jj" ClassId="35" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ii" ClassId="34" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="hh" ClassId="34" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="gg" ClassId="32" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="32" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="ff" ClassId="31" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="ee" ClassId="30" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="dd" ClassId="29" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="cc" ClassId="28" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="28" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="bb" ClassId="27" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="aa" ClassId="26" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="z" ClassId="25" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="y" ClassId="24" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="24" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="x" ClassId="23" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="w" ClassId="22" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="v" ClassId="21" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="u" ClassId="20" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="20" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="t" ClassId="19" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="s" ClassId="18" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="r" ClassId="17" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="q" ClassId="16" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="16" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="p" ClassId="15" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="o" ClassId="14" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="n" ClassId="13" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="m" ClassId="12" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="12" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="l" ClassId="11" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="k" ClassId="10" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="j" ClassId="9" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="i" ClassId="8" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="8" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="h" ClassId="7" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="g" ClassId="6" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="f" ClassId="5" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="e" ClassId="4" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="4" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label x:Name="d" ClassId="3" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="c" ClassId="2" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="b" ClassId="1" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="a" ClassId="0" Text="0" FontAttributes="Bold" FontSize="20" TextColor="Black" HeightRequest="25" WidthRequest="13">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ByteTapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <Label Text="0" HorizontalOptions="End" VerticalOptions="End" />
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>

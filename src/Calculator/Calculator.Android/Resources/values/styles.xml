@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <style name="MainTheme" parent="MainTheme.Base">
+  </style>
+  <!-- Base theme applied no matter what API -->
+  <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="android:colorAccent">@color/colorAccent</item>
+    <item name="android:colorPrimary">@color/colorPrimary</item>
+    <item name="android:colorPrimaryDark">@color/colorPrimary</item>
+    <item name="android:windowBackground">@color/colorBackground</item>
+    <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="android:textColorPrimary">@android:color/black</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <!--<item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="colorPrimary">#D3D3D3</item>
+    <item name="android:textColorPrimary">@android:color/black</item>
+    <item name="colorPrimaryDark">#D3D3D3</item>
+    <item name="colorAccent">#000000</item>
+    <item name="windowActionModeOverlay">true</item>
+    <item name="android:textAllCaps">false</item>
+    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>-->
+  </style>
+
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">#D3D3D3</item>
+  </style>
+</resources>

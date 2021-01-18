@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Calculator"
+             x:Class="Calculator.MainPage"
+             xmlns:views="clr-namespace:Calculator.Views">
+
+    <!--大纲视图-->
+    <MasterDetailPage.Master>
+        <!--引入 MasterPage 并给个名称，用于后台设置 MasterPage 传递过来的 ListView-->
+        <local:MasterPage x:Name="masterPage" />
+    </MasterDetailPage.Master>
+
+    <!--细节视图-->
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <!--默认显示的页面-->
+                <views:StandardPage />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>

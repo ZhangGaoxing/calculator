@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.Views.AboutPage"
+             Title="关于">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="LogoPath"
+                  x:TypeArguments="x:String"
+                  iOS="logo.png"
+                  Android="logo.png"
+                  WinPhone="logo.png" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.35*" />
+                <RowDefinition Height="0.6*" />
+            </Grid.RowDefinitions>
+
+            <Grid BackgroundColor="#D3D3D3">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Image Source="logo.png" Margin="0,15,0,0" WidthRequest="120" HeightRequest="120" HorizontalOptions="Center"  />
+
+                    <Label Text="高兴计算" TextColor="White" FontSize="30" Margin="0,10,0,0" HorizontalTextAlignment="Center" />
+                    <Label x:Name="VersionLabel" TextColor="White" HorizontalTextAlignment="Center" Margin="0,0,0,0" />
+                    <Label x:Name="Publisher" Text="张高兴" TextColor="White" HorizontalTextAlignment="Center" Margin="0,0,0,15" />
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <StackLayout>
+                    <Label Text="仿 Windows 10 UWP 版计算器。" Margin="20,20,0,0" />
+                    <Label Text="发送反馈" FontSize="22" Margin="20,20,0,0" />
+                    <StackLayout Orientation="Horizontal" Margin="20,5,0,0">
+                        <Label VerticalTextAlignment="Center">发送邮件至：</Label>
+                        <Label x:Name="Email" Text="zhangyuexin121@live.cn" VerticalTextAlignment="Center"  TextColor="DodgerBlue"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="20,5,0,0">
+                        <Label VerticalTextAlignment="Center">新浪微博私信：</Label>
+                        <Image x:Name="Weibo" Source="weibo.png" HeightRequest="35" WidthRequest="35" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

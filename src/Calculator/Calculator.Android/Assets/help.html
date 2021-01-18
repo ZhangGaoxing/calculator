@@ -1,0 +1,280 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        @font-face {
+            font-family: 'Segoe MDL2 Assets';
+            src: url('segmdl2.ttf');
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+        table {
+            border: 1px solid black;
+            width: 100%;
+        }
+        .left {
+            border: 1px solid black;
+            width: 30%;
+            text-align: right;
+        }
+        .right {
+            border: 1px solid black;
+            width: 70%;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>高兴计算 帮助</h1>
+
+    <div id="catalog">
+        <h2>目录</h2>
+        <ul>
+            <li><a href="#general">通用说明</a></li>
+            <li><a href="#standard">标准</a></li>
+            <li><a href="#science">科学</a></li>
+            <li><a href="#programmer">程序员</a></li>
+            <li><a href="#statistics">统计信息</a></li>
+            <li><a href="#date">日期计算</a></li>
+            <li><a href="#color">颜色</a></li>
+            <li><a href="#update-log">更新日志</a></li>
+        </ul>
+    </div>
+
+    <div id="general">
+        <h2>通用说明</h2>
+        <div>
+            <h3>1. 清除操作</h3>
+            <table>
+                <tr>
+                    <td class="left">CE</td>
+                    <td class="right">Clear Error，仅清除当前操作</td>
+                </tr>
+                <tr>
+                    <td class="left">C</td>
+                    <td class="right">Clear，清除所有操作</td>
+                </tr>
+                <tr>
+                    <td class="left" style="font-family:'Segoe MDL2 Assets'">&#xE94F;</td>
+                    <td class="right">退格</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>2. 内存操作</h3>
+            <table>
+                <tr>
+                    <td class="left">MS</td>
+                    <td class="right">Memory Save，内存存储</td>
+                </tr>
+                <tr>
+                    <td class="left">MC</td>
+                    <td class="right">Memory Clear，清除所有内存</td>
+                </tr>
+                <tr>
+                    <td class="left">MR</td>
+                    <td class="right">Memory Read，内存调用</td>
+                </tr>
+                <tr>
+                    <td class="left">M+</td>
+                    <td class="right">Memory Add，内存增加</td>
+                </tr>
+                <tr>
+                    <td class="left">M-</td>
+                    <td class="right">Memory Minus，内存减少</td>
+                </tr>
+                <tr>
+                    <td class="left">M</td>
+                    <td class="right">Memory，所有内存</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>3. 其他操作</h3>
+            <table>
+                <tr>
+                    <td class="left">↑</td>
+                    <td class="right">功能切换</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="standard">
+        <h2>标准</h2>
+        <p>顺序优先型计算，支持内存操作与历史记录功能。</p>
+    </div>
+
+    <div id="science">
+        <h2>科学</h2>
+        <p>运算符优先型计算，支持内存操作与历史记录功能。</p>
+        <div>
+            <h3>1. 切换操作</h3>
+            <table>
+                <tr>
+                    <td class="left">DEG - RAD</td>
+                    <td class="right">角度 - 弧度 切换</td>
+                </tr>
+                <tr>
+                    <td class="left">HYP</td>
+                    <td class="right">双曲函数 切换</td>
+                </tr>
+                <tr>
+                    <td class="left">F-E</td>
+                    <td class="right">科学记数法 转换</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>2. 功能操作</h3>
+            <table>
+                <tr>
+                    <td class="left">Exp</td>
+                    <td class="right">科学记数法输入</td>
+                </tr>
+                <tr>
+                    <td class="left">dms</td>
+                    <td class="right">度 转 度分秒</td>
+                </tr>
+                <tr>
+                    <td class="left">deg</td>
+                    <td class="right">度分秒 转 度</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="programmer">
+        <h2>程序员</h2>
+        <p>运算符优先型计算，支持内存操作功能。值类型为有符号型，最高位为符号位。</p>
+        <div>
+            <h3>1. 键盘操作</h3>
+            <table>
+                <tr>
+                    <td class="left" style="font-family:'Segoe MDL2 Assets'">&#xE75F;</td>
+                    <td class="right">数字键盘</td>
+                </tr>
+                <tr>
+                    <td class="left" style="font-family:'Segoe MDL2 Assets'">&#xE10C;</td>
+                    <td class="right">比特键盘</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>2. 进制操作</h3>
+            <table>
+                <tr>
+                    <td class="left">HEX</td>
+                    <td class="right">十六进制</td>
+                </tr>
+                <tr>
+                    <td class="left">DEC</td>
+                    <td class="right">十进制</td>
+                </tr>
+                <tr>
+                    <td class="left">OTC</td>
+                    <td class="right">八进制</td>
+                </tr>
+                <tr>
+                    <td class="left">BIN</td>
+                    <td class="right">二进制</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>3. 字长操作</h3>
+            <table>
+                <tr>
+                    <td class="left">QWORD</td>
+                    <td class="right">64位</td>
+                </tr>
+                <tr>
+                    <td class="left">DWORD</td>
+                    <td class="right">32位</td>
+                </tr>
+                <tr>
+                    <td class="left">WORD</td>
+                    <td class="right">16位</td>
+                </tr>
+                <tr>
+                    <td class="left">BYTE</td>
+                    <td class="right">8位</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>4. 功能操作</h3>
+            <table>
+                <tr>
+                    <td class="left">Lsh</td>
+                    <td class="right">左移指定位数</td>
+                </tr>
+                <tr>
+                    <td class="left">Rsh</td>
+                    <td class="right">右移指定位数</td>
+                </tr>
+                <tr>
+                    <td class="left">RoL</td>
+                    <td class="right">左移一位</td>
+                </tr>
+                <tr>
+                    <td class="left">RoR</td>
+                    <td class="right">右移一位</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="statistics">
+        <h2>统计信息</h2>
+        <p>简单的求和，平均以及标准差。通过 Add 与 Del 按键对数据进行添加删除。</p>
+    </div>
+
+    <div id="date">
+        <h2>日期计算</h2>
+        <p>计算两日期的间隔天数和添加或减去天数后的日期。</p>
+    </div>
+
+    <div id="color">
+        <h2>颜色</h2>
+        <p>十六进制颜色与RGB颜色转换</p>
+    </div>
+
+    <div id="update-log">
+        <h2>更新日志</h2>
+        <div>
+            <h3>1.0.0 - 2017/11/14</h3>
+            <p>第一版</p>
+        </div>
+        <div>
+            <h3>1.1.0 - 2018/01/01</h3>
+            <p>
+                1. 新增数字分隔符<br />
+                2. 新增 Shortcut 快捷方式（部分启动器不支持）<br />
+                3. 修复性更新
+            </p>
+        </div>
+        <div>
+            <h3>1.1.1 - 2018/01/06</h3>
+            <p>
+                1. 修复性更新
+            </p>
+        </div>
+        <div>
+            <h3>1.1.2 - 2018/01/13</h3>
+            <p>
+                1. 修复性更新
+            </p>
+        </div>
+        <div>
+            <h3>1.2.0 - 2020/04/20</h3>
+            <p>
+                1. 优化运行速度
+            </p>
+        </div>
+    </div>
+</body>
+</html>

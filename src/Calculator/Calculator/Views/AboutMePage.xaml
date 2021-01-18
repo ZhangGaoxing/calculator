@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.Views.AboutMePage"
+             Title="关于作者">
+
+    <ScrollView BackgroundColor="Transparent" HorizontalOptions="Center" VerticalOptions="Start">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="280" />
+                <RowDefinition Height="0.8*" />
+            </Grid.RowDefinitions>
+
+            <RelativeLayout>
+                <Image Aspect="AspectFill" Source="background.png" VerticalOptions="FillAndExpand"
+                           RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                           RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}" />
+
+                <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                          RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
+                          RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+                          RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackLayout VerticalOptions="Center">
+                        <Image Source="avatar.png" HeightRequest="130" WidthRequest="130" HorizontalOptions="Center" />
+
+                        <Label Text="张高兴" FontSize="24" HorizontalTextAlignment="Center" TextColor="White" Margin="0,5,0,0" />
+                        <Label Text="A college student, love .NET and C#." HorizontalTextAlignment="Center" TextColor="White" Margin="0,5,0,0" />
+                    </StackLayout>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Text="Weibo" TextColor="White" BackgroundColor="LightCoral" />
+                        <Button Text="GitHub" TextColor="White" BackgroundColor="LightSeaGreen" Grid.Column="1" />
+                        <Button Text="Blog" TextColor="White" BackgroundColor="DeepSkyBlue" Grid.Column="2" />
+                    </Grid>
+                </Grid>
+            </RelativeLayout>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="1" Margin="0,10,0,0">
+                    <Label TextColor="Black" Margin="20,0,20,0">
+                        张高兴致力于打造无内购、无广告的干净应用，在 UWP 这个小圈子里做出自己微小的贡献。
+                    </Label>
+                    <Label TextColor="Black" Margin="20,0,0,0">
+                        如果您觉得本应用还不错的话，请捐助我。
+                    </Label>
+
+                    <StackLayout Orientation="Horizontal" Margin="20,10,0,0">
+                        <Button Text="支付宝" Clicked="Button_Clicked" />
+                        <Button Text="微信" Margin="10,0,0,0" Clicked="Button_Clicked" />
+                    </StackLayout>
+
+                    <Button x:Name="CloseWindow" Text="关闭" HorizontalOptions="End" Margin="0,0,20,0" Clicked="CloseWindow_Clicked" />
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

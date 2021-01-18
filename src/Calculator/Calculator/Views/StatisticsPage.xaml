@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.Views.StatisticsPage"
+             Title="统计">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="SegoeMDL2"
+                  x:TypeArguments="x:String"
+                  iOS="Segoe MDL2 Assets"
+                  Android="segmdl2.ttf#Segoe MDL2 Assets" />
+
+            <OnPlatform x:Key="SegoeSymbol"
+                  x:TypeArguments="x:String"
+                  iOS="Segoe UI Symbol"
+                  Android="seguisym.ttf#Segoe UI Symbol" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BackgroundColor="#D3D3D3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3.5*" />
+            <RowDefinition Height="0.7*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="8,0,8,0">
+            <Grid.RowDefinitions>
+                <!--<RowDefinition Height="40" />-->
+                <RowDefinition Height="3.5*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--<Button x:Name="HistoryBtn" Text="&#xECC5;" HeightRequest="40" WidthRequest="40" FontFamily="{StaticResource SegoeMDL2}" HorizontalOptions="End" />-->
+            <ListView x:Name="DataListView" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" ItemSelected="DataListView_ItemSelected" />
+            <ScrollView Grid.Row="1">
+                <Label x:Name="Result" HorizontalOptions="End" FontSize="28" TextColor="Black" Text="" />
+            </ScrollView>
+        </Grid>
+
+        <!--<Grid x:Name="HistoryGrid" Grid.Row="2" Margin="8,0,8,0" IsVisible="False">
+            <ListView x:Name="History" VerticalOptions="StartAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Tip}" FontSize="18" HorizontalOptions="End" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding Result}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>-->
+
+        <Grid x:Name="MemoryGrid" Grid.Row="2" Margin="8,0,8,0" IsVisible="False">
+            <ListView x:Name="MemoryHistory" ItemTapped="MemoryHistory_ItemTapped" VerticalOptions="FillAndExpand" RowHeight="45">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="5">
+                                <Label Text="{Binding Memory}" FontSize="18" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="8,0,8,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="MC" ClassId="MC" Grid.Column="0" Text="MC" TextColor="Black" IsEnabled="False" FontSize="12" Clicked="Memory_Clicked" />
+            <Button x:Name="MR" ClassId="MR" Grid.Column="1" Text="MR" TextColor="Black" IsEnabled="False" FontSize="12" Clicked="Memory_Clicked" />
+            <Button x:Name="MAdd" ClassId="MAdd" Grid.Column="2" Text="M+" TextColor="Black" IsEnabled="True" FontSize="12" Clicked="Memory_Clicked" />
+            <Button x:Name="MMinus" ClassId="MMinus" Grid.Column="3" Text="M-" TextColor="Black" IsEnabled="True" FontSize="12" Clicked="Memory_Clicked" />
+            <Button x:Name="MS" ClassId="MS" Grid.Column="4" Text="MS" TextColor="Black" IsEnabled="True" FontSize="12" Clicked="Memory_Clicked" />
+            <Button x:Name="M" ClassId="M" Grid.Column="5" Text="M" TextColor="Black" IsEnabled="False" FontSize="12" Clicked="Memory_Clicked" />
+        </Grid>
+
+        <Grid x:Name="ButtonGrid" Grid.Row="2" Margin="8,0,8,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button ClassId="Backspace" Grid.Row="0" Grid.Column="0" Text="&#xE94F;" FontFamily="{StaticResource SegoeMDL2}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" BackgroundColor="Silver" Clicked="Func_Clicked" />
+            <Button ClassId="CAD" Grid.Row="0" Grid.Column="1" Text="CAD" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="Func_Clicked" />
+            <Button ClassId="C" Grid.Row="0" Grid.Column="2" Text="C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="Func_Clicked"  />
+            <Button ClassId="FE" Grid.Row="0" Grid.Column="3" Text="F-E" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="FE_Clicked" />
+            <Button ClassId="Exp" Grid.Row="0" Grid.Column="4" Text="Exp" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+
+            <Button Grid.Row="1" Grid.Column="0" Text="7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="1" Grid.Column="1" Text="8" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="1" Grid.Column="2" Text="9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked"  />
+            <Button ClassId="Ave" Grid.Row="1" Grid.Column="3" Image="Ave.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+            <Button ClassId="SqAve" Grid.Row="1" Grid.Column="4" Image="SqAve.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+
+            <Button Grid.Row="2" Grid.Column="0" Text="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="2" Grid.Column="1" Text="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="2" Grid.Column="2" Text="6" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked"  />
+            <Button ClassId="Sum" Grid.Row="2" Grid.Column="3" Text="∑ 𝑥" FontFamily="{StaticResource SegoeSymbol}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+            <Button ClassId="SqSum" Grid.Row="2" Grid.Column="4" Text="∑ 𝑥²" FontFamily="{StaticResource SegoeSymbol}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+
+            <Button Grid.Row="3" Grid.Column="0" Text="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="3" Grid.Column="1" Text="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="3" Grid.Column="2" Text="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked"  />
+            <Button ClassId="StdDev" Grid.Row="3" Grid.Column="3" Text="𝜎n" FontFamily="{StaticResource SegoeSymbol}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+            <Button ClassId="SampltStdDev" Grid.Row="3" Grid.Column="4" Text="𝜎n-1" FontFamily="{StaticResource SegoeSymbol}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="OthersFunc_Clicked" />
+
+            <Button Grid.Row="4" Grid.Column="0" Text="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked" />
+            <Button Grid.Row="4" Grid.Column="1" Text="." HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" FontAttributes="Bold" BackgroundColor="White" Clicked="Number_Clicked"  />
+            <Button x:Name="Opposite" Grid.Row="4" Grid.Column="2" Text="±" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="18" BackgroundColor="Silver" Clicked="Opposite_Clicked"/>
+            <Button ClassId="Add" Grid.Row="4" Grid.Column="3" Text="Add" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="DataFunc_Clicked" />
+            <Button ClassId="Del" Grid.Row="4" Grid.Column="4" Text="Del" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FontSize="16" BackgroundColor="Silver" Clicked="DataFunc_Clicked" />
+        </Grid>
+
+    </Grid>
+</ContentPage>

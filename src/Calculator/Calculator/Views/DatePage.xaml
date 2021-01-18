@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.Views.DatePage"
+             Title="日期计算">
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Margin="10">
+                <Label Text="日期之间的相隔时间" FontSize="20" />
+
+                <Label Text="自：" />
+                <DatePicker x:Name="FromDt" Format="yyyy/MM/dd" DateSelected="IntervalDt_DateSelected" />
+                <Label Text="至：" />
+                <DatePicker x:Name="ToDt" Format="yyyy/MM/dd" DateSelected="IntervalDt_DateSelected" />
+
+                <Label Text="间隔天数：" />
+                <Label x:Name="WeekInterval" FontAttributes="Bold" Text="" />
+                <Label x:Name="DayInterval" FontAttributes="Bold" Text="" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Margin="10">
+                <Label Text="添加或减去天数" FontSize="20" />
+
+                <Label Text="自：" />
+                <DatePicker x:Name="From" Format="yyyy/MM/dd" />
+                <Label Text="变量：" />
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                    <Label Text="年：" VerticalOptions="Center" />
+                    <Entry x:Name="Year" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                    <Label Text="月：" VerticalOptions="Center" />
+                    <Entry x:Name="Month" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                    <Label Text="日：" VerticalOptions="Center" />
+                    <Entry x:Name="Day" HorizontalOptions="FillAndExpand" Keyboard="Numeric" />
+                    <Button Text="计算" Clicked="Calculate_Clicked" />
+                </StackLayout>
+
+                <Label Text="日期：" />
+                <Label x:Name="ResultDt" FontAttributes="Bold" Text="" />
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>
